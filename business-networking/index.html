@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Контур — деловой клуб: каталог участников, подбор по встречным запросам и закрытые встречи.">
+<title>Контур Нетворк</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- ARTIFACT:BEGIN -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="6" cy="7" r="2.6"></circle>
+        <circle cx="18" cy="6" r="2.6"></circle>
+        <circle cx="12" cy="18" r="2.6"></circle>
+        <path d="M8.3 8.4 10.6 15.8M15.9 8 13.4 16M8.4 6.4h7"></path>
+      </svg>
+      Контур
+    </a>
+    <nav class="site-nav">
+      <a href="#match">Подбор</a>
+      <a href="#people">Участники</a>
+      <a href="#events">Встречи</a>
+      <a href="#join">Заявка</a>
+    </nav>
+    <button class="icon-btn" type="button" id="theme-toggle" aria-label="Переключить тему" title="Переключить тему">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4.4"></circle>
+        <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Деловой клуб · 18 городов · шестой сезон</span>
+        <h1>Нетворкинг, в котором считают сделки, а не визитки</h1>
+        <p class="lead">Раз в неделю сорок предпринимателей и руководителей приносят в круг по одному запросу и одному ресурсу. Каталог сводит их автоматически: вы отмечаете, что ищете и чем полезны, — и видите, у кого встречный запрос.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#match">Подобрать людей</a>
+          <a class="btn btn-ghost" href="#join">Подать заявку</a>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>214</b><span>участников в шести странах</span></div>
+        <div class="stat"><b>61</b><span>сделка внутри круга за год</span></div>
+        <div class="stat"><b>4</b><span>встречи в месяц</span></div>
+        <div class="stat"><b>2&nbsp;из&nbsp;3</b><span>запросов закрываются за сезон</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="match">
+    <div class="section-head">
+      <h2>Что вам нужно и чем вы полезны</h2>
+      <p>Подбор двусторонний: сначала ищем тех, у кого есть нужное вам, потом тех, кому нужно ваше. Совпадения подсвечиваются в карточках.</p>
+    </div>
+    <div class="matcher">
+      <div class="matcher-cols">
+        <div class="matcher-col">
+          <span class="eyebrow">Мне нужно</span>
+          <div class="chips" id="needs-chips"></div>
+        </div>
+        <div class="matcher-col">
+          <span class="eyebrow">Я могу быть полезен</span>
+          <div class="chips" id="offers-chips"></div>
+        </div>
+      </div>
+      <div class="matcher-foot">
+        <p id="match-summary">Отметьте хотя бы один пункт — и каталог пересортируется по силе совпадения.</p>
+        <button class="btn btn-quiet" type="button" id="reset-match" style="margin-left:auto">Сбросить</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="people">
+    <div class="section-head">
+      <h2>Каталог участников</h2>
+      <p>Каждый профиль держит один ресурс и один открытый запрос — это условие членства, а не анкета для красоты.</p>
+    </div>
+    <div class="toolbar">
+      <div class="field search-field">
+        <label for="search">Поиск</label>
+        <input type="text" id="search" placeholder="Имя, компания, город или запрос">
+      </div>
+      <div class="field">
+        <label for="filter-city">Город</label>
+        <select id="filter-city"></select>
+      </div>
+      <div class="field">
+        <label for="filter-industry">Отрасль</label>
+        <select id="filter-industry"></select>
+      </div>
+      <div class="field">
+        <label for="sort">Сортировка</label>
+        <select id="sort">
+          <option value="match">По совпадениям</option>
+          <option value="name">По алфавиту</option>
+        </select>
+      </div>
+      <span class="result-count" id="result-count"></span>
+    </div>
+    <div class="people" id="people-grid"></div>
+  </section>
+
+  <section class="block wrap" id="events">
+    <div class="section-head">
+      <h2>Ближайшие встречи</h2>
+      <p>Формат один и тот же шесть лет: восемь запросов, восемь ресурсов, никаких презентаций со сцены.</p>
+    </div>
+    <div class="events" id="events-list"></div>
+  </section>
+
+  <section class="block wrap" id="join">
+    <div class="section-head">
+      <h2>Заявка на вступление</h2>
+      <p>Заявки разбирает организатор, решение — на ближайшем совете клуба. После отправки вы сразу увидите, с кем совпали.</p>
+    </div>
+    <div class="join-grid">
+      <form class="form-card" id="join-form" novalidate>
+        <div class="form-rows">
+          <div class="field">
+            <label for="f-name">Имя и фамилия</label>
+            <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Мария Ильина">
+          </div>
+          <div class="field">
+            <label for="f-role">Роль</label>
+            <input type="text" id="f-role" name="role" autocomplete="organization-title" placeholder="Коммерческий директор">
+          </div>
+          <div class="field">
+            <label for="f-company">Компания</label>
+            <input type="text" id="f-company" name="company" autocomplete="organization" placeholder="«Ильина и партнёры»">
+          </div>
+          <div class="field">
+            <label for="f-city">Город</label>
+            <input type="text" id="f-city" name="city" autocomplete="address-level2" placeholder="Нижний Новгород">
+          </div>
+          <div class="field span-2">
+            <label for="f-industry">Отрасль</label>
+            <select id="f-industry" name="industry"></select>
+          </div>
+          <div class="field span-2">
+            <label>Чем я полезен кругу</label>
+            <div class="chips" id="form-offers"></div>
+          </div>
+          <div class="field span-2">
+            <label>Что я ищу</label>
+            <div class="chips" id="form-needs"></div>
+          </div>
+          <div class="field span-2">
+            <label for="f-about">Запрос одной фразой</label>
+            <textarea id="f-about" name="about" placeholder="Ищу подрядчика на складскую автоматизацию до конца года; взамен открываю сеть из 40 магазинов для совместных промо."></textarea>
+          </div>
+        </div>
+        <p class="form-error" id="form-error" role="alert"></p>
+        <div class="matcher-foot">
+          <button class="btn btn-primary" type="submit">Отправить заявку</button>
+          <p class="form-note">Заявка сохраняется только в вашем браузере — почта клуба подключается отдельно.</p>
+        </div>
+        <p class="form-status" id="form-status" hidden></p>
+      </form>
+
+      <div class="rules">
+        <span class="eyebrow">Правила круга</span>
+        <div class="rule">
+          <b>01</b>
+          <p><strong>Один запрос за раз.</strong> Размытое «ищу полезные знакомства» не обрабатывается ни людьми, ни каталогом.</p>
+        </div>
+        <div class="rule">
+          <b>02</b>
+          <p><strong>Ресурс важнее статуса.</strong> В профиле указывают то, что готовы отдать завтра, а не должность десятилетней давности.</p>
+        </div>
+        <div class="rule">
+          <b>03</b>
+          <p><strong>Продажи — только по приглашению.</strong> Питчить участника можно после того, как он попросил.</p>
+        </div>
+        <div class="rule">
+          <b>04</b>
+          <p><strong>Два пропуска подряд — пауза.</strong> Место передаётся из листа ожидания, вернуться можно в следующем сезоне.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Контур — деловой клуб. Встречи в Москве, Санкт-Петербурге, Алматы и онлайн.</span>
+    <span>Демонстрационный каталог: участники и встречи вымышлены, заявки и записи хранятся в вашем браузере.</span>
+  </div>
+</footer>
+
+<dialog id="person-dialog" aria-label="Карточка участника">
+  <div class="dialog-body" id="dialog-content"></div>
+</dialog>
+<!-- ARTIFACT:END -->
+<script src="app.js" defer></script>
+</body>
+</html>
